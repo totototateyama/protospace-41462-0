@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :move_to_index, except: [:index, :show, :new, :destroy]
+  before_action :move_to_index, except: [:index, :show, :new, :destroy, :create]
 
   def index
     @prototypes = Prototype.all
@@ -38,10 +38,12 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.new(prototype_params)
+
     if @prototype.save
       redirect_to root_path
     else
       @prototype
+
       render :new, status: :unprocessable_entity
     end
   end
